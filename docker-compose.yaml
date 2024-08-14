@@ -1,0 +1,24 @@
+services:
+  web:
+    container_name: jobportal-springmvc
+    image: syshero/jobportal:1.0.0
+    depends_on:
+      - mysql8-container
+    ports:
+      - 8080:8080
+    environment:
+      - MYSQL_HOST=mysql8-container
+  mysql8-container:
+    container_name: mysql8-container
+    image: mysql:8.3.0
+    restart: always
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: jobportal
+      MYSQL_USER: jobportal
+      MYSQL_PASSWORD: jobportal
+    ports:
+      - 3306:3306
+# docker exec -it mysql8-container mysql -u jobportal -p

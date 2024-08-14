@@ -1,0 +1,38 @@
+# Loại bỏ thư mục Maven target (chứa các file build)
+target/
+
+# Loại bỏ các thư mục liên quan đến IDE
+.idea/
+.project
+.classpath
+*.iml
+
+# Loại bỏ các file cấu hình cụ thể của IDE
+*.launch
+*.log
+*.swp
+
+# Loại bỏ thư mục cài đặt Maven repository (nếu có)
+.mvn/
+.m2/
+
+# Loại bỏ các file và thư mục Git
+.git/
+.gitignore
+.gitmodules
+
+# Loại bỏ file build tool khác (nếu có)
+gradle/
+build/
+.gradle/
+*.gradle
+*.jar
+*.war
+
+# Loại bỏ thư mục chứa các dependency download (nếu có)
+dependency-reduced-pom.xml
+
+# Loại bỏ các file tạm thời hoặc backup
+*.bak
+*.tmp
+*.DS_Store

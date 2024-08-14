@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <link
+      th:rel="stylesheet"
+      th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+      th:href="@{/css/font-awesome.min.css}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+      th:href="@{/css/styles.css}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <meta charset="ISO-8859-1" />
+    <title>Sign Up</title>
+  </head>
+
+  <body>
+    <section class="content hidden-overflow">
+      <div class="row">
+        <div class="col-6 coffee_mug_background">
+          <div class="mt-2 pt-4 pe-auto">
+            <a href="/" class="logo_left">
+              <label class="logo"> SysHeroJobs </label>
+              <label class="logo_com"> .com </label>
+            </a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="top-margin">
+            <div class="d-flex justify-content-center mb-4">
+              <h1 class="heading_font font-weight-bold">Create User Account</h1>
+            </div>
+            <div class="myForm">
+              <form
+                th:action="@{/register/new}"
+                th:object="${user}"
+                method="post"
+                onsubmit="return validateForm()"
+              >
+                <div class="box-body bozero mx2p">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          placeholder="Email"
+                          name="email"
+                          th:field="*{email}"
+                          type="email"
+                          style="width: 100%"
+                          class="form-control"
+                        />
+                        <div id="emailError" class="error"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          placeholder="Password"
+                          name="password"
+                          th:field="*{password}"
+                          type="password"
+                          class="form-control pwd"
+                        />
+                        <div id="passwordError" class="error"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <select
+                        required
+                        class="form-select"
+                        th:field="*{userTypeId}"
+                      >
+                        <th:block th:each="userType :${getAllTypes}">
+                          <option
+                            th:text="${userType.userTypeName}"
+                            th:value="${userType.userTypeId}"
+                          ></option>
+                        </th:block>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-footer">
+                  <div class="row">
+                    <div class="form-group mt-3 col-md-12">
+                      <button type="submit" class="myBtn py-3">Save</button>
+                    </div>
+                    <p class="text-center mt-2">
+                      Already have an account?
+                      <a class="color-text" href="#" th:href="@{/login}">
+                        Login Now
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function validateForm() {
+          var email = document.forms[0]["email"].value;
+          var password = document.forms[0]["password"].value;
+          var valid = true;
+      
+          // Reset previous error messages
+          document.getElementById("emailError").innerHTML = "";
+          document.getElementById("passwordError").innerHTML = "";
+      
+          // Email validation
+          if (!email) {
+              document.getElementById("emailError").innerHTML = "Email is required";
+              valid = false;
+          } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              document.getElementById("emailError").innerHTML = "Invalid email format";
+              valid = false;
+          }
+      
+          // Password validation
+          if (!password) {
+              document.getElementById("passwordError").innerHTML = "Password is required";
+              valid = false;
+          } 
+      
+          return valid;
+      }
+      </script>
+
+    <style>
+      .error {
+        color: red;
+        font-size: 12px;
+      }
+    </style>
+  </body>
+
+  <script
+    type="text/javascript"
+    th:src="@{/webjars/jquery/jquery.min.js}"
+  ></script>
+  <script
+    type="text/javascript"
+    th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"
+  ></script>
+</html>
